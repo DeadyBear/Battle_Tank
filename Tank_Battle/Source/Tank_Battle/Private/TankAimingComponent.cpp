@@ -4,7 +4,7 @@
 #include "Classes/Engine/StaticMesh.h"
 #include "Engine/World.h"
 #include "Classes/Kismet/GameplayStatics.h"
-
+#include "TankBarrel.h"
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
 {
@@ -15,8 +15,7 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent *BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel *BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
@@ -29,7 +28,6 @@ void UTankAimingComponent::BeginPlay()
 	// ...
 	
 }
-
 
 // Called every frame
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -50,7 +48,6 @@ void UTankAimingComponent::AimingTowards(FVector Hitlocation , float LaunchSpeed
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrel(AimDirection);
 	}
-	
 }
 
 void UTankAimingComponent::MoveBarrel(FVector AimDirection)
@@ -59,8 +56,5 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 	FRotator AimAsRotator = AimDirection.Rotation();
 	FRotator DeltaRotaion = BarrelRotation - AimAsRotator;
 
-	UE_LOG(LogTemp, Warning, TEXT("Barrel Rotation : %s"), *DeltaRotaion.ToString());
-
-	//Limit the Barrel Elvation Rotation
-	//Max Elevation Speed
+	Barrel->Elevate(5);
 }
