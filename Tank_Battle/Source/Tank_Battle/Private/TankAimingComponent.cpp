@@ -39,14 +39,20 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 
 void UTankAimingComponent::AimingTowards(FVector Hitlocation , float LaunchSpeed)
 {
-	if (!Barrel) { return; }
+	if (!Barrel) { UE_LOG(LogTemp, Error, TEXT("Barrel Not Found!!")); return; }
 
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
-	if (UGameplayStatics::SuggestProjectileVelocity(this, OutLaunchVelocity, StartLocation, Hitlocation, LaunchSpeed, false , 0 , 0 , ESuggestProjVelocityTraceOption::DoNotTrace))
+	bool bHaveAimSoulutuin = UGameplayStatics::SuggestProjectileVelocity(this, OutLaunchVelocity, StartLocation, Hitlocation, LaunchSpeed, false, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace);
+	if (bHaveAimSoulutuin)
 	{
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrel(AimDirection);
+	}
+	else
+	{
+		auto time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f: No aim Solution found"), time);
 	}
 }
 
@@ -54,7 +60,8 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 {
 	FRotator BarrelRotation = Barrel->GetForwardVector().Rotation();
 	FRotator AimAsRotator = AimDirection.Rotation();
-	FRotator DeltaRotaion = BarrelRotation - AimAsRotator;
 
-	Barrel->Elevate(5);
+	FRotator DeltaRotaion = AimAsRotator - BarrelRotation;
+
+	Barrel->Elevate(DeltaRotaion.Pitch);
 }
