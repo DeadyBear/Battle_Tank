@@ -32,10 +32,8 @@ void UTankAimingComponent::SetTurretRefrence(UTankTurret *TurretToSet)
 void UTankAimingComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if (!Barrel) { UE_LOG(LogTemp, Error, TEXT("Barrel Not Found!!")); }
-	if (!Turret) { UE_LOG(LogTemp, Error, TEXT("Turret Not Found!!")); }
 	
+	//...
 }
 
 // Called every frame
@@ -48,8 +46,8 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 
 void UTankAimingComponent::AimingTowards(FVector Hitlocation , float LaunchSpeed)
 {
-	if (!Barrel) {  return; }
-	if (!Turret) { return; }
+	if (!Barrel) { UE_LOG(LogTemp, Error, TEXT("Barrel Not Found!!")); }
+	if (!Turret) { UE_LOG(LogTemp, Error, TEXT("Turret Not Found!!")); }
 
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
