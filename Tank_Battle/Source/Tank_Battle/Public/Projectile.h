@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "Projectile.generated.h"
-
 UCLASS()
 class TANK_BATTLE_API AProjectile : public AActor
 {
@@ -14,6 +14,8 @@ class TANK_BATTLE_API AProjectile : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AProjectile();
+	
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -22,7 +24,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
 	
+	void LaunchProjectile(float Speed);
+
+private:
+	UProjectileMovementComponent* ProjectileMovementComponenet = nullptr;
 	
 };

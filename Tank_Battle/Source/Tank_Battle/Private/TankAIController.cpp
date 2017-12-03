@@ -8,34 +8,6 @@ void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FString TankAIController = GetTankAIController()->GetName();
-	if (!GetPlayerTank())
-	{
-		UE_LOG(LogTemp, Error, TEXT("PlayerTank was not found"));
-		return;
-	}
-	FString PlayerTank = GetPlayerTank()->GetName();
-	if (!GetTankAIController())
-	{
-		UE_LOG(LogTemp, Error, TEXT("TankController is not possesed"));
-		return;
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Tank AI possesed by : %s"), *TankAIController);
-	}
-
-
-
-	if (!GetPlayerTank())
-	{
-		UE_LOG(LogTemp, Error, TEXT("PlayerTank was not found"));
-		return;
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("%s found  : %s"), *TankAIController , *PlayerTank);
-	}
 
 }
 
@@ -47,6 +19,7 @@ void ATankAIController::Tick(float DeltaTime)
 
 	GetTankAIController()->AimAt(HitLocation);
 
+	GetTankAIController()->fire();
 }
 
 ATank * ATankAIController::GetTankAIController() const
