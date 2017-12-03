@@ -24,14 +24,14 @@ class TANK_BATTLE_API ATankPlayerController_C : public APlayerController
 	
 		bool GetSightRayHitLocation(FVector &) const;
 
-		UPROPERTY(EditAnywhere)
-			float CrosshairXLocation = 0.5f;
+		UPROPERTY(EditDefaultsOnly)
+		float CrosshairXLocation = 0.5f;
 
-		UPROPERTY(EditAnywhere)
-			float CrosshairYLocation = 0.333f;
+		UPROPERTY(EditDefaultsOnly)
+		float CrosshairYLocation = 0.333f;
 
-		UPROPERTY(EditAnywhere)
-			float Range = 1000000.0f;
+		UPROPERTY(EditDefaultsOnly)
+		float Range = 1000000.0f;
 
 		bool GetCameraLookDirection(FVector2D  , FVector &) const;
 
