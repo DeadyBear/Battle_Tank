@@ -3,6 +3,7 @@
 #include "Tank.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
+#include "TankMovementComponent.h"
 #include "Framework/Application/SlateApplication.h"
 #include "TankAimingComponent.h"
 #include "Engine/World.h"
@@ -50,7 +51,6 @@ void ATank::fire()
 	bool IsReloadTime = (FPlatformTime::Seconds() - LastTimeFire) > ReloadTime;
 	if (Barrel && IsReloadTime)
 	{
-		//Spawns Projectile
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Projectile")));
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastTimeFire = FPlatformTime::Seconds();
