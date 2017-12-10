@@ -14,12 +14,13 @@ UCLASS()
 class TANK_BATTLE_API ATankPlayerController_C : public APlayerController
 {
 	GENERATED_BODY()
+
+private:
+
 		virtual void Tick(float DeltaTime) override;
 
 		void BeginPlay() override;
 
-		ATank* GetTankController() const;
-	
 		void AimTowardsCrosshair();
 	
 		bool GetSightRayHitLocation(FVector &) const;
@@ -36,4 +37,8 @@ class TANK_BATTLE_API ATankPlayerController_C : public APlayerController
 		bool GetCameraLookDirection(FVector2D  , FVector &) const;
 
 		bool GetLookVectorHitLocation(FVector &, FVector&) const;
+
+protected:
+		UFUNCTION(BlueprintCallable)
+		ATank* GetTankController() const;
 };
