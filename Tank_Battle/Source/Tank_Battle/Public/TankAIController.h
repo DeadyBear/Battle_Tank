@@ -16,6 +16,6 @@ class TANK_BATTLE_API ATankAIController : public AAIController
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	float AcceptanceRadius = 3000;
+	float AcceptanceRadius = 300;
 
 };
