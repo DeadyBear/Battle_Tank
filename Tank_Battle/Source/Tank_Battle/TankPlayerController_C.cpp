@@ -10,20 +10,18 @@ void ATankPlayerController_C::BeginPlay()
 {	
 	Super::BeginPlay();
 
-	FString TankController = GetTankController()->GetName();
+	UE_LOG(LogTemp, Warning, TEXT("Donkey:TankPlayerController BeginPlay() Called"));
+
 	if (!GetTankController())
 	{
 		UE_LOG(LogTemp, Error, TEXT("TankController is not possesed"));
 		return;
 	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("TankController is possesed by: %s"), *TankController);
-	}
 }
 
 ATank * ATankPlayerController_C::GetTankController() const
 {
+
 	return Cast<ATank>(GetPawn());
 }
 
