@@ -38,8 +38,8 @@ public:
 	void MoveBarrel(FVector AimDirection);
 	void MoveTurret(FVector AimDirection);
 
-	void SetBarrelReference(UTankBarrel*);
-	void SetTurretRefrence(UTankTurret*);
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void InitialiseAimingComponents(UTankTurret* TurretToSet, UTankBarrel* BarrelToSet);
 
 
 private:
